@@ -1,13 +1,10 @@
 from pathlib import Path
 import os
 
-# Correct BASE_DIR Definition
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Template Directory
-TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "templates")
-
-# Quick-start development settings - unsuitable for production
+# Security settings
 SECRET_KEY = 'django-insecure-qrac2bbr!(nthd%px=g47d0%1$^p*d$v7(^9j8m*b92g5)p*w2'
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -20,8 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.bookmodule',
-    'apps.usermodule',
+    'apps.bookmodule',   # Ensure this is correct
+    'apps.usermodule',   # Ensure this is correct
+    'myapp',            # Ensure this is correct
 ]
 
 MIDDLEWARE = [
@@ -36,11 +34,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'libraryproject.urls'
 
+# Template configuration
+TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates")  # Correct template path
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        'DIRS': [TEMPLATE_DIR],  # Make sure Django looks for templates here
+        'APP_DIRS': True,  # Enables automatic template discovery in installed apps
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -51,7 +51,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'libraryproject.wsgi.application'
 
@@ -77,12 +76,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static Files Configuration
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'apps', 'bookmodule', 'static'),
+    BASE_DIR / "static",  # If you have a global static directory
+    BASE_DIR / "apps" / "bookmodule" / "static",  # If you want to include the static directory of your app
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # For collectstatic command
 
 # Default Primary Key Field Type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

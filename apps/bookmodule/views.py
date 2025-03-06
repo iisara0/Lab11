@@ -12,3 +12,15 @@ def about_us(request):
 
 def one_book(request, bookId):
     return render(request, 'bookmodule/one_book.html')
+
+def links_page(request):
+    return render(request, 'bookmodule/html5/links.html')
+
+def formatting_page(request):
+    return render(request, 'bookmodule/html5/text/formatting.html')
+
+def listing_page(request):
+    return render(request, 'bookmodule/html5/listing.html')
+
+def tables_page(request):
+    return render(request, 'bookmodule/html5/tables.html')

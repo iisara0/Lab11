@@ -1,0 +1,29 @@
+.custom-link {
+    display: block; /* Each link takes full width */
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 5px auto;
+    width: 200px;
+    border-radius: 5px;
+}
+
+/* Visited link color */
+.custom-link:visited {
+    color: purple;
+}
+
+/* Change background on hover */
+.custom-link:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Change color when clicked */
+.custom-link:active {
+    background-color: red;
+    color: white;
+}

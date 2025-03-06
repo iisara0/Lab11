@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Links Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>HTML5 Links</h1>
+        <p>This is a page that displays HTML5 links.</p>
+
+        <a href="https://www.example.com" class="custom-link">Example Link</a>
+        <a href="https://www.djangoproject.com" class="custom-link">Django Website</a>
+        <a href="https://www.qu.edu.qa" target="_blank" class="custom-link" style="background-color: lightgreen; color: red;">
+            Go to QU website (open a new tab)
+        </a>
+        <a href="https://www.qu.edu.qa" class="custom-link" style="background-color: gray; color: yellow;">
+            Go to QU website (open in the same page/tab)
+        </a>
+        <a href="https://www.qu.edu.qa" class="custom-link" style="background-color: black; color: white;">
+            Go to QU website (open in the same page/tab)
+        </a>
+    </div>
+</body>
+</html>
