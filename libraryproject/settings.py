@@ -17,9 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.bookmodule',   # Ensure this is correct
-    'apps.usermodule',   # Ensure this is correct
-    'myapp',            # Ensure this is correct
+    'apps.bookmodule',  # Ensure the app exists
+    'apps.usermodule',  # Ensure the app exists
+    'myapp',            # Ensure the app exists
 ]
 
 MIDDLEWARE = [
@@ -35,11 +35,13 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'libraryproject.urls'
 
 # Template configuration
-TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates")  # Correct template path
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")  # Global template directory
+BOOKMODULE_TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates")  # Book module template
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],  # Make sure Django looks for templates here
+        'DIRS': [TEMPLATE_DIR, BOOKMODULE_TEMPLATE_DIR],  # Add both global and module-specific templates
         'APP_DIRS': True,  # Enables automatic template discovery in installed apps
         'OPTIONS': {
             'context_processors': [
@@ -76,11 +78,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-
+# Static Files Configuration
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # If you have a global static directory
-    BASE_DIR / "apps" / "bookmodule" / "static",  # If you want to include the static directory of your app
+    BASE_DIR / "static",  # Global static directory
+    os.path.join(BASE_DIR, "apps", "bookmodule", "static"),  # App-specific static directory
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # For collectstatic command
