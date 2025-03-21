@@ -17,9 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.bookmodule',  # Ensure the app exists
-    'apps.usermodule',  # Ensure the app exists
-    'myapp',            # Ensure the app exists
+    'apps.bookmodule',
+    'apps.usermodule',  
+
 ]
 
 MIDDLEWARE = [
@@ -60,7 +60,10 @@ WSGI_APPLICATION = 'libraryproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+        'OPTIONS': {
+            'timeout': 20,  
+        }
     }
 }
 
