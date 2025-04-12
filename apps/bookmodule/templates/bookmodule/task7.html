@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number of Students per City</title>
+    <style>
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #e6f7ff;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Number of Students per City</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>Number of Students</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in city %}
+            <tr>
+                <td>{{ item.city }}</td>
+                <td>{{ item.student_count }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No data available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Students without Address</h2>
+    <ul>
+        {% for student in students_without_address %}
+            <li>{{ student.name }}</li>
+        {% empty %}
+            <li>No students without address.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Price Statistics</title>
+    <style>
+        table { width: 50%; border-collapse: collapse; margin: 40px auto; }
+        th, td { padding: 12px; border: 1px solid #aaa; text-align: left; }
+        th { background-color: #e6f7ff; }
+        h2 { text-align: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h2>Book Price Statistics</h2>
+    <table>
+        <tr><th>Total Books</th><td>{{ stats.total_books }}</td></tr>
+        <tr><th>Total Price</th><td>${{ stats.total_price }}</td></tr>
+        <tr><th>Average Price</th><td>${{ stats.avg_price|floatformat:2 }}</td></tr>
+        <tr><th>Maximum Price</th><td>${{ stats.max_price }}</td></tr>
+        <tr><th>Minimum Price</th><td>${{ stats.min_price }}</td></tr>
+    </table>
+</body>
+</html>
