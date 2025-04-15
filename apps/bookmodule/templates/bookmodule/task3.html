@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Books Edition ≤ 3 and No 'co' in Title or Author</title>
-    <style>
-        table { width: 70%; border-collapse: collapse; margin: 20px auto; }
-        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
-        th { background-color: #e6f7ff; }
-        h2 { text-align: center; margin-top: 30px; }
-    </style>
-</head>
+<head><title>Task 3 - Oldest Students</title></head>
 <body>
-    <h2>Books with Edition ≤ 3 and No 'co' in Title or Author</h2>
-    <table>
-        <tr><th>Title</th><th>Author</th><th>Price</th><th>Edition</th></tr>
-        {% for book in books %}
-        <tr>
-            <td>{{ book.title }}</td>
-            <td>{{ book.author }}</td>
-            <td>${{ book.price }}</td>
-            <td>{{ book.edition }}</td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="4">No matching books found.</td></tr>
-        {% endfor %}
-    </table>
+<h1>Oldest Student by Department</h1>
+<table border="1">
+    <tr>
+        <th>Department</th>
+        <th>Oldest Student</th>
+    </tr>
+    {% for dept, student in oldest_students %}
+    <tr>
+        <td>{{ dept }}</td>
+        <td>{{ student }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">No students found for this department</td>
+    </tr>
+    {% endfor %}
+</table>
 </body>
 </html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Books Edition ≤ 3 and No 'co' in Title or Author</title>-->
+<!--    <style>-->
+<!--        table { width: 70%; border-collapse: collapse; margin: 20px auto; }-->
+<!--        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }-->
+<!--        th { background-color: #e6f7ff; }-->
+<!--        h2 { text-align: center; margin-top: 30px; }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h2>Books with Edition ≤ 3 and No 'co' in Title or Author</h2>-->
+<!--    <table>-->
+<!--        <tr><th>Title</th><th>Author</th><th>Price</th><th>Edition</th></tr>-->
+<!--        {% for book in books %}-->
+<!--        <tr>-->
+<!--            <td>{{ book.title }}</td>-->
+<!--            <td>{{ book.author }}</td>-->
+<!--            <td>${{ book.price }}</td>-->
+<!--            <td>{{ book.edition }}</td>-->
+<!--        </tr>-->
+<!--        {% empty %}-->
+<!--        <tr><td colspan="4">No matching books found.</td></tr>-->
+<!--        {% endfor %}-->
+<!--    </table>-->
+<!--</body>-->
+<!--</html>-->

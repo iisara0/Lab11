@@ -1,30 +1,66 @@
 from django.shortcuts import render
-from .models import Book, Student, Address
+from .models import Book, Student, Address ,Department ,Course
 from django.db.models import Q, Count, Sum, Avg, Max, Min
 
 
 def task1(request):
-    books = Book.objects.filter(Q(price__gte=80))
-    return render(request, 'bookmodule/task1.html', {'books': books})
+    departments = Department.objects.annotate(student_count=Count('student'))
+    return render(request, 'bookmodule/task1.html', {'departments': departments})
+
 
 
 def task2(request):
-    books = Book.objects.filter(
-        Q(edition__gt=3) & (Q(title__icontains='co') | Q(author__icontains='co'))
-    )
-    return render(request, 'bookmodule/task2.html', {'books': books})
+    courses = Course.objects.annotate(student_count=Count('student'))
+    return render(request, 'bookmodule/task2.html', {'courses': courses})
 
 
 def task3(request):
-    books = Book.objects.filter(
-        Q(edition__lte=3) & ~Q(title__icontains='co') & ~Q(author__icontains='co')
-    )
-    return render(request, 'bookmodule/task3.html', {'books': books})
+    
+    departments = Department.objects.annotate( min_card_id=Min('student__card__id') )
+
+
+    oldest_students = []
+    for dept in departments:
+        
+        if dept.min_card_id is not None:
+            
+            student = dept.student.filter(card__id=dept.min_card_id).first()
+            if student:
+                oldest_students.append((dept.name, student.name))
+        else:
+            oldest_students.append((dept.name, "No students"))
+
+    return render(request, 'bookmodule/task3.html', {'oldest_students': oldest_students})
+
 
 
 def task4(request):
-    books = Book.objects.all().order_by('title')
-    return render(request, 'bookmodule/task4.html', {'books': books})
+    departments = Department.objects.annotate(student_count=Count('student')).filter(student_count__gt=2).order_by('-student_count')
+    return render(request, 'bookmodule/task4.html', {'departments': departments})
+
+
+# def task1(request):
+#     books = Book.objects.filter(Q(price__gte=80))
+#     return render(request, 'bookmodule/task1.html', {'books': books})
+
+
+# def task2(request):
+#     books = Book.objects.filter(
+#         Q(edition__gt=3) & (Q(title__icontains='co') | Q(author__icontains='co'))
+#     )
+#     return render(request, 'bookmodule/task2.html', {'books': books})
+
+
+# def task3(request):
+#     books = Book.objects.filter(
+#         Q(edition__lte=3) & ~Q(title__icontains='co') & ~Q(author__icontains='co')
+#     )
+#     return render(request, 'bookmodule/task3.html', {'books': books})
+
+
+# def task4(request):
+#     books = Book.objects.all().order_by('title')
+#     return render(request, 'bookmodule/task4.html', {'books': books})
 
 
 def task5(request):
