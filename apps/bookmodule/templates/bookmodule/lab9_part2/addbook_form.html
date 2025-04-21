@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Book</title>
+</head>
+<body>
+    <h1>Add a New Book</h1>
+    <form method="post">
+
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Add Book</button>
+    </form>
+    <br>
+    <a href="{% url 'list_books_form' %}">Back to List</a>
+</body>
+</html>
+
+
+

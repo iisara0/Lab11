@@ -14,9 +14,21 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path("simple/query/", views.simple_query, name="simple_query"), 
     path("complex/query/", views.lookup_query, name="lookup_query"),
-
     path('lab9/task1', views.task1),
     path('lab9/task2', views.task2),
     path('lab9/task3', views.task3),
     path('lab9/task4', views.task4),
+
+
+    path('lab9_part1/listbooks', views.list_books, name='list_books'),
+    path('lab9_part1/addbook', views.addbook, name='addbook'),
+    path('lab9_part1/editbook/<int:id>', views.editbook, name='editbook'),
+    path('lab9_part1/deletebook/<int:id>', views.deletebook, name='deletebook'),
+
+    path('lab9_part2/listbooks', views.list_books_form, name='list_books_form'),
+    path('lab9_part2/addbook', views.addbook_form, name='addbook_form'),
+    path('lab9_part2/editbook/<int:id>/', views.editbook_form, name='editbook_form'),
+    path('lab9_part2/deletebook/<int:id>/', views.deletebook_form, name='deletebook_form'),
+
+
 ]

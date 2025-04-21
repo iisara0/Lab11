@@ -36,12 +36,12 @@ ROOT_URLCONF = 'libraryproject.urls'
 
 # Template configuration
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")  # Global template directory
-BOOKMODULE_TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates")  # Book module template
+BOOKMODULE_TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates", "lab9_part1")  # Book module template
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, BOOKMODULE_TEMPLATE_DIR],  # Add both global and module-specific templates
+        'DIRS': [],  # Add both global and module-specific templates
         'APP_DIRS': True,  # Enables automatic template discovery in installed apps
         'OPTIONS': {
             'context_processors': [
