@@ -1,34 +1,48 @@
-from django.shortcuts import render ,get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import render, redirect , HttpResponse
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from apps.users.forms import CustomUserCreationForm
 
 
-#Task1 LAB12
-
-# Task 1: Register View
-def register(request):
+def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'تم التسجيل بنجاح.')
-            return redirect('login')
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'You have successfully registered.')
+            return redirect('index')
+        else:
+            messages.error(request, 'Registration error.')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'users/register.html', {'form': form})
 
-# Task 2: Custom Login View
-class CustomLoginView(LoginView):
-    template_name = 'users/login.html'
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, 'Login successful , Welcome back!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Login error.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'users/login.html', {'form': form})
 
-# Task 3: Custom Logout View
-class CustomLogoutView(LogoutView):
-    next_page = 'login'
 
-# Task 4: Example of protected view
+
 @login_required
-def protected_view(request):
-    return render(request, 'users/protected.html')
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Logged out.')
+    return redirect('login')
 
+
+
+def index(request):
+    return render(request, 'bookmodule/index.html')

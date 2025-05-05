@@ -41,7 +41,7 @@ BOOKMODULE_TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "template
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Add both global and module-specific templates
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Add both global and module-specific templates
         'APP_DIRS': True,  # Enables automatic template discovery in installed apps
         'OPTIONS': {
             'context_processors': [
