@@ -1,5 +1,45 @@
 from django import forms
-from .models import Book
+from .models import Book, Students, Students2,StudentImage
+
+
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Students
+        fields = ['name', 'age', 'address', ]
+        labels = {
+            'name': 'Full Name',
+            'age': 'Age',
+            'address': 'City',
+        }
+
+
+class Student2Form(forms.ModelForm):
+    class Meta:
+        model = Students2
+        fields = '__all__'
+
+class StudentImageForm(forms.ModelForm):
+    class Meta:
+        model = StudentImage
+        fields = '__all__'
+
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+
+
+
+
+
+
+
+
 
 
 class BookForm(forms.ModelForm):
@@ -37,3 +77,7 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'author', 'price', 'edition']
+
+
+
+

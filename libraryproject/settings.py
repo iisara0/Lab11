@@ -18,8 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.bookmodule',
-    'apps.usermodule',  
-
+    'apps.usermodule',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -36,7 +36,7 @@ ROOT_URLCONF = 'libraryproject.urls'
 
 # Template configuration
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")  # Global template directory
-BOOKMODULE_TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates", "lab9_part1")  # Book module template
+BOOKMODULE_TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "bookmodule", "templates")  # Book module template
 
 TEMPLATES = [
     {
@@ -62,7 +62,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / "db.sqlite3",
         'OPTIONS': {
-            'timeout': 20,  
+            'timeout': 20,
         }
     }
 }
@@ -87,8 +87,14 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",  # Global static directory
     os.path.join(BASE_DIR, "apps", "bookmodule", "static"),  # App-specific static directory
 ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # For collectstatic command
 
-# Default Primary Key Field Type
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = '/'

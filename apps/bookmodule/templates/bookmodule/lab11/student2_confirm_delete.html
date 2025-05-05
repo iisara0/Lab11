@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .confirm-box {
+            background-color: #fff3f3;
+            padding: 20px;
+            border: 1px solid #ffcccc;
+            border-radius: 10px;
+            width: 400px;
+        }
+        h1 {
+            color: #d9534f;
+        }
+        p {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #d9534f;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #555;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="confirm-box">
+        <h1>Delete Student: {{ student.name }}</h1>
+
+        <p>Are you sure you want to delete this student?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm Delete</button>
+        </form>
+
+        <a href="{% url 'student2_list' %}">Cancel</a>
+    </div>
+
+</body>
+</html>

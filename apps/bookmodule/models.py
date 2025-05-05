@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class Card(models.Model):
     card_number = models.IntegerField()
 
@@ -31,7 +30,7 @@ class Book(models.Model):
         return self.title
 
 
-
+#Task 1 LAB11
 class Address(models.Model):
     city = models.CharField(max_length=100)
 
@@ -47,5 +46,33 @@ class Students(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+class Address2(models.Model):
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.city
+
+class Students2(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    addresses = models.ManyToManyField(Address2)
+    image = models.ImageField(upload_to='student_photos/', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class StudentImage(models.Model):
+    student = models.OneToOneField(Students2, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='student_photo/')
+
+    def __str__(self):
+        return self.student.name
+
+
+
 
 

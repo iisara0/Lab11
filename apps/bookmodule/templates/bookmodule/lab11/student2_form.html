@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.pk %}Update Student{% else %}Add Student{% endif %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .errorlist {
+            color: red;
+            margin: 5px 0;
+        }
+        img {
+            margin-top: 10px;
+            width: 120px;
+            height: auto;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #555;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{% if form.instance.pk %}Update Student{% else %}Add Student{% endif %}</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <label for="id_name">Name:</label>
+        {{ form.name.errors }}
+        {{ form.name }}
+
+        <label for="id_age">Age:</label>
+        {{ form.age.errors }}
+        {{ form.age }}
+
+        <label for="id_addresses">Addresses (Cities):</label>
+        {{ form.addresses.errors }}
+        {{ form.addresses }}
+
+        <label for="id_image">Image:</label>
+        {{ form.image.errors }}
+        {{ form.image }}
+
+        {% if form.instance.image %}
+            <p>Current Image:</p>
+            <img src="{{ form.instance.image.url }}" alt="Student Image">
+        {% endif %}
+
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="{% url 'student2_list' %}">Back to List</a>
+
+</body>
+</html>
